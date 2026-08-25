@@ -6,6 +6,7 @@ import fontforge
 import os.path
 
 from meta import META
+from kerning import add_kerning
 
 
 def replace_glyphs(
@@ -59,6 +60,9 @@ def replace_glyphs(
         m['PostScriptName'][:16],
         m['Version']
     ))
+
+    # Kern swara pairs from the replaced glyphs' measured side bearings
+    add_kerning(output_font)
 
     output_font.save(output_font_path)
     print(output_font_path)
