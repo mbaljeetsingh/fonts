@@ -6,6 +6,7 @@ import fontforge
 import os.path
 
 from meta import META
+from kan import add_kan
 
 
 def replace_glyphs(
@@ -59,6 +60,9 @@ def replace_glyphs(
         m['PostScriptName'][:16],
         m['Version']
     ))
+
+    # Add kan (grace note) small forms and brace substitution
+    add_kan(output_font)
 
     output_font.save(output_font_path)
     print(output_font_path)
