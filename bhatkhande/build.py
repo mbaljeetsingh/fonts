@@ -60,6 +60,13 @@ def replace_glyphs(
         m['Version']
     ))
 
+    # OS/2 v4 (declared in the base SFD, with USE_TYPO_METRICS) derives
+    # sCapHeight/sxHeight from Latin H/x, which are blank in this font --
+    # use the swara body height from the replaced outlines instead.
+    height = int(round(output_font['s'].boundingBox()[3]))
+    output_font.os2_capheight = height
+    output_font.os2_xheight = height
+
     output_font.save(output_font_path)
     print(output_font_path)
 
